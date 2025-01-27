@@ -1,6 +1,6 @@
 (* Solutions to SA2 assignment, Intro to ML *)
 
-(* Name:                                    *)
+(* Name: AJ Cronin*)
 (* Time spent on HW6:
 *)
 
@@ -12,24 +12,66 @@ use "Unit.sml";
 
 (**** Problem A ****)
 
-fun mynull []       = true
-  | mynull (_::_)   = false
+(* fun mynull []       = true
+  | mynull (_::_)   = false;
 
 val () =
     Unit.checkExpectWith Bool.toString "mynull [] should be true"
     (fn () => mynull [])
     true
 
+val () =
+    Unit.checkExpectWith Bool.toString "mynull [1,2,3] should be false"
+    (fn () => mynull [1,2,3])
+    false
+*)
 
 (**** Problem B ****)
-(*
-fun firstVowel _ = false
+
+(*fun firstVowel [] = false
+  | firstVowel (#"a"::_) = true
+  | firstVowel (#"e"::_) = true
+  | firstVowel (#"i"::_) = true
+  | firstVowel (#"o"::_) = true
+  | firstVowel (#"u"::_) = true
+  | firstVowel (_::_) = false;
 
 val () =
     Unit.checkExpectWith Bool.toString "firstVowel 'ack' should be true"
     (fn () => firstVowel [#"a",#"c",#"k"])
     true
+
+val () =
+    Unit.checkExpectWith Bool.toString "firstVowel 'eep' should be true"
+    (fn () => firstVowel [#"e",#"e",#"p"])
+    true
+
+val () =
+    Unit.checkExpectWith Bool.toString "firstVowel 'ick' should be true"
+    (fn () => firstVowel [#"i",#"c",#"k"])
+    true
+
+val () =
+    Unit.checkExpectWith Bool.toString "firstVowel 'ood' should be true"
+    (fn () => firstVowel [#"o",#"o",#"d"])
+    true
+
+val () =
+    Unit.checkExpectWith Bool.toString "firstVowel 'ugh' should be true"
+    (fn () => firstVowel [#"u",#"g",#"h"])
+    true
+
+val () =
+    Unit.checkExpectWith Bool.toString "firstVowel 'moo' should be false"
+    (fn () => firstVowel [#"m",#"o",#"o"])
+    false
+
+val () =
+    Unit.checkExpectWith Bool.toString "firstVowel '' should be false"
+    (fn () => firstVowel [])
+    false
 *)
+
 (**** Problem C ****)
 (*
 fun reverse xs = xs
