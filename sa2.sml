@@ -5,6 +5,7 @@
 *)
 
 (* Collaborators and references:
+    ChatGPT 4o mini
 *)
 
 (* indicate planning to use the Unit testing module *)
@@ -73,18 +74,36 @@ val () =
 *)
 
 (**** Problem C ****)
-(*
-fun reverse xs = xs
+
+fun reverse list = foldl (fn (x, xs) => x :: xs) [] list;
 
 val () =
   Unit.checkExpectWith (Unit.listString Int.toString) 
   "reverse [1,2] should be [2,1]"
   (fn () => reverse [1,2])
   [2,1]
-*)
+
+val () =
+  Unit.checkExpectWith (Unit.listString Int.toString) 
+  "reverse [1,2,3] should be [3,2,1]"
+  (fn () => reverse [1,2,3])
+  [3,2,1]
+
+val () =
+  Unit.checkExpectWith (Unit.listString Int.toString) 
+  "reverse [] should be []"
+  (fn () => reverse [])
+  []
+
+val () =
+  Unit.checkExpectWith (Unit.listString Int.toString) 
+  "reverse [2,2,3,2,2] should be [2,2,3,2,2]"
+  (fn () => reverse [2,2,3,2,2])
+  [2,2,3,2,2]
+
 (**** Problem D ****)
 (*
-fun minlist _ = 0
+fun minlist list = foldl(fn (x, xs) => ) Int.min
 
 val () =
   Unit.checkExnWith Int.toString
