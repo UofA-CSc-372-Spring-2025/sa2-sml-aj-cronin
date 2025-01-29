@@ -75,6 +75,7 @@ val () =
 
 (**** Problem C ****)
 
+(*
 fun reverse list = foldl (fn (x, xs) => x :: xs) [] list;
 
 val () =
@@ -100,28 +101,70 @@ val () =
   "reverse [2,2,3,2,2] should be [2,2,3,2,2]"
   (fn () => reverse [2,2,3,2,2])
   [2,2,3,2,2]
-
+*)
 (**** Problem D ****)
 (*
-fun minlist list = foldl(fn (x, xs) => ) Int.min
+exception EmptyList;
+fun minlist [] = raise EmptyList
+  | minlist (x::xs) = foldl Int.min x xs;
+
 
 val () =
   Unit.checkExnWith Int.toString
   "minlist [] should raise an exception"
   (fn () => minlist [])
 
+
 val () =
   Unit.checkExpectWith Int.toString
   "minlist [1,2,3,4,0] should be 0"
   (fn () => minlist [1,2,3,4,0])
   0
+
+val () =
+  Unit.checkExpectWith Int.toString
+  "minlist [2,2,0,2,2] should be 0"
+  (fn () => minlist [2,2,0,2,2])
+  0
 *)
 (**** Problem E ****)
-(*
+
 exception Mismatch
 
-fun zip _ = []
-*)
+fun zip ([], []) = [] 
+  | zip (x::xs, y::ys) = (x, y) :: zip (xs, ys) 
+  | zip (_, _) = raise Mismatch;
+
+
+val () = Unit.checkExpectWith (Unit.listString (Unit.pairString Unit.intString Unit.intString)) 
+  "zip ([1, 2, 3], [4, 5, 6]) should be [(1, 4), (2, 5), (3, 6)]" 
+  (fn () => zip ([1, 2, 3], [4, 5, 6])) 
+  [(1, 4), (2, 5), (3, 6)]
+
+val () = Unit.checkExpectWith (Unit.listString (Unit.pairString Unit.intString Unit.intString)) 
+  "zip ([1], [9]) should be [(1, 9)]" 
+  (fn () => zip ([1], [9])) 
+  [(1, 9)]
+
+val () = Unit.checkExpectWith (Unit.listString (Unit.pairString Unit.intString Unit.boolString)) 
+  "zip ([1], [true]) should be [(1, true)]" 
+  (fn () => zip ([1], [true])) 
+  [(1, true)]
+
+val () = Unit.checkExnWith (Unit.listString (Unit.pairString Unit.intString Unit.intString)) 
+  "zip ([1], [2,3]) should raise an exception" 
+  (fn () => zip ([1], [2,3])) 
+
+val () = Unit.checkExnWith (Unit.listString (Unit.pairString Unit.intString Unit.intString)) 
+  "zip ([1,2], [3]) should raise an exception" 
+  (fn () => zip ([1,2], [3])) 
+
+val () = Unit.checkExpectWith (Unit.listString (Unit.pairString Unit.intString Unit.intString)) 
+  "zip ([], []) should be []" 
+  (fn () => zip ([], [])) 
+  []
+
+
 (**** Problem F ****)
 (*
 fun concat xs = xs
