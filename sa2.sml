@@ -256,15 +256,24 @@ val () =
   "<circle cx=\"200\" cy=\"300\" r=\"100\" fill=\"red\" />";
 
 (**** Problem J ****)
-(*
-fun partition p (x :: xs) = ([],[])
+
+fun partition p ([]) = ([],[])
+  | partition p (x::xs) =
+      let
+        val (pass, fail) = partition p (xs)
+      in
+        if p x then
+          (x::pass, fail)
+        else
+          (pass, x::fail)
+      end;
 
 val () =
   Unit.checkExpectWith (fn (l1, l2) => "(" ^ Unit.listString Int.toString l1 ^ ", " ^ Unit.listString Int.toString l2 ^ ")")
   "partition (fn x => x mod 2 = 0) [1, 2, 3, 4, 5] should return ([2, 4], [1, 3, 5])"
   (fn () => partition (fn x => x mod 2 = 0) [1, 2, 3, 4, 5])
   ([2, 4], [1, 3, 5]);
-*)
+
 
 (* Unit testing reporting *)
 
