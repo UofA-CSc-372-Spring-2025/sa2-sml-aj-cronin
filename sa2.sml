@@ -128,7 +128,7 @@ val () =
   0
 *)
 (**** Problem E ****)
-
+(*
 exception Mismatch
 
 fun zip ([], []) = [] 
@@ -163,30 +163,98 @@ val () = Unit.checkExpectWith (Unit.listString (Unit.pairString Unit.intString U
   "zip ([], []) should be []" 
   (fn () => zip ([], [])) 
   []
-
+*)
 
 (**** Problem F ****)
 (*
-fun concat xs = xs
+fun concat [] = []
+  | concat (x::xs) = x @ concat xs;
+
+val () = Unit.checkExpectWith (Unit.listString Unit.intString) 
+  "concat [[1], [2, 3, 4], [], [5, 6]] should be [1, 2, 3, 4, 5, 6]" 
+  (fn () => concat [[1], [2, 3, 4], [], [5, 6]]) 
+  [1, 2, 3, 4, 5, 6]
+
+val () = Unit.checkExpectWith (Unit.listString Unit.intString) 
+  "concat [[1], [2, 3, 4], [], [5, 6], [], [], [], [], [], [7]] should be [1, 2, 3, 4, 5, 6]" 
+  (fn () => concat [[1], [2, 3, 4], [], [5, 6], [], [], [], [], [], [7]]) 
+  [1, 2, 3, 4, 5, 6, 7]
+
+val () = Unit.checkExpectWith (Unit.listString Unit.intString) 
+  "concat []" 
+  (fn () => concat []) 
+  []
+
 *)
+
 (**** Problem G ****)
 (*
-fun isDigit _    = false;
+fun isDigit #"0" = true
+  | isDigit #"1" = true
+  | isDigit #"2" = true
+  | isDigit #"3" = true
+  | isDigit #"4" = true
+  | isDigit #"5" = true
+  | isDigit #"6" = true
+  | isDigit #"7" = true
+  | isDigit #"8" = true
+  | isDigit _ = false;
+
+val () =
+  Unit.checkExpectWith Bool.toString "isDigit 0 should be true"
+  (fn () => isDigit #"0")
+  true
+
+val () =
+  Unit.checkExpectWith Bool.toString "isDigit 2 should be true"
+  (fn () => isDigit #"2")
+  true
+
+val () =
+  Unit.checkExpectWith Bool.toString "isDigit a should be false"
+  (fn () => isDigit #"a")
+  false
+
 *)
+
 (**** Problem H ****)
 (*
-fun isAlpha c = false
+fun isAlpha c = (Char.ord c >= 97 andalso Char.ord c <= 122) 
+  orelse (Char.ord c >= 65 andalso Char.ord c <= 90)
+
+val () =
+  Unit.checkExpectWith Bool.toString "isAlpha a should be true"
+  (fn () => isAlpha #"a")
+  true
+
+val () =
+  Unit.checkExpectWith Bool.toString "isAlpha A should be true"
+  (fn () => isAlpha #"A")
+  true
+
+val () =
+  Unit.checkExpectWith Bool.toString "isAlpha 4 should be false"
+  (fn () => isAlpha #"4")
+  false
+
+val () =
+  Unit.checkExpectWith Bool.toString "isAlpha . should be false"
+  (fn () => isAlpha #".")
+  false
+
 *)
+
 (**** Problem I ****)
-(*
-fun svgCircle (cx, cy, r, fill) = "NOT IMPLEMENTED YET"
+
+fun svgCircle (cx, cy, r, fill) = 
+   "<circle cx=\"" ^ Int.toString cx ^ "\" cy=\"" ^ Int.toString cy ^ "\" r=\"" ^ Int.toString r ^ "\" fill=\"" ^ fill ^ "\" />"
 
 val () =
   Unit.checkExpectWith (fn x => x)
   "svgCircle (200, 300, 100, \"red\") should return <circle cx=\"200\" cy=\"300\" r=\"100\" fill=\"red\" />"
   (fn () => svgCircle (200, 300, 100, "red"))
   "<circle cx=\"200\" cy=\"300\" r=\"100\" fill=\"red\" />";
-*)
+
 (**** Problem J ****)
 (*
 fun partition p (x :: xs) = ([],[])
