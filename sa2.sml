@@ -2,6 +2,7 @@
 
 (* Name: AJ Cronin*)
 (* Time spent on HW6:
+  ~2 Hours 45 Minutes to 3 Hours
 *)
 
 (* Collaborators and references:
@@ -13,7 +14,7 @@ use "Unit.sml";
 
 (**** Problem A ****)
 
-(* fun mynull []       = true
+fun mynull []       = true
   | mynull (_::_)   = false;
 
 val () =
@@ -25,11 +26,11 @@ val () =
     Unit.checkExpectWith Bool.toString "mynull [1,2,3] should be false"
     (fn () => mynull [1,2,3])
     false
-*)
+
 
 (**** Problem B ****)
 
-(*fun firstVowel [] = false
+fun firstVowel [] = false
   | firstVowel (#"a"::_) = true
   | firstVowel (#"e"::_) = true
   | firstVowel (#"i"::_) = true
@@ -71,11 +72,11 @@ val () =
     Unit.checkExpectWith Bool.toString "firstVowel '' should be false"
     (fn () => firstVowel [])
     false
-*)
+
 
 (**** Problem C ****)
 
-(*
+
 fun reverse list = foldl (fn (x, xs) => x :: xs) [] list;
 
 val () =
@@ -101,9 +102,9 @@ val () =
   "reverse [2,2,3,2,2] should be [2,2,3,2,2]"
   (fn () => reverse [2,2,3,2,2])
   [2,2,3,2,2]
-*)
+
 (**** Problem D ****)
-(*
+
 exception EmptyList;
 fun minlist [] = raise EmptyList
   | minlist (x::xs) = foldl Int.min x xs;
@@ -126,9 +127,9 @@ val () =
   "minlist [2,2,0,2,2] should be 0"
   (fn () => minlist [2,2,0,2,2])
   0
-*)
+
 (**** Problem E ****)
-(*
+
 exception Mismatch
 
 fun zip ([], []) = [] 
@@ -163,10 +164,10 @@ val () = Unit.checkExpectWith (Unit.listString (Unit.pairString Unit.intString U
   "zip ([], []) should be []" 
   (fn () => zip ([], [])) 
   []
-*)
+
 
 (**** Problem F ****)
-(*
+
 fun concat [] = []
   | concat (x::xs) = x @ concat xs;
 
@@ -185,10 +186,9 @@ val () = Unit.checkExpectWith (Unit.listString Unit.intString)
   (fn () => concat []) 
   []
 
-*)
 
 (**** Problem G ****)
-(*
+
 fun isDigit #"0" = true
   | isDigit #"1" = true
   | isDigit #"2" = true
@@ -198,6 +198,7 @@ fun isDigit #"0" = true
   | isDigit #"6" = true
   | isDigit #"7" = true
   | isDigit #"8" = true
+  | isDigit #"9" = true
   | isDigit _ = false;
 
 val () =
@@ -215,10 +216,10 @@ val () =
   (fn () => isDigit #"a")
   false
 
-*)
+
 
 (**** Problem H ****)
-(*
+
 fun isAlpha c = (Char.ord c >= 97 andalso Char.ord c <= 122) 
   orelse (Char.ord c >= 65 andalso Char.ord c <= 90)
 
@@ -242,7 +243,7 @@ val () =
   (fn () => isAlpha #".")
   false
 
-*)
+
 
 (**** Problem I ****)
 
